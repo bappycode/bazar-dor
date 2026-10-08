@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface Product {
@@ -128,58 +129,65 @@ const ProductSort = ({ products }: ProductSortProps) => {
                 key={product.id}
                 className="flex min-h-[170px] flex-col rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
               >
-                {/* Product Info */}
-                <div className="flex items-center gap-3">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-neutral-50 text-2xl">
-                    {product.image}
+                <Link href={`/product/${product.slug}`}>
+                  {/* Product Info */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-neutral-50 text-2xl">
+                      {product.image}
+                    </div>
+
+                    <div className="min-w-0">
+                      <h2 className="truncate text-base font-bold text-neutral-800">
+                        {product.nameBn}
+                      </h2>
+                      <p className="mt-0.5 text-xs text-neutral-500">
+                        প্রতি{" "}
+                        {{
+                          dozen: "ডজন",
+                          kg: "কেজি",
+                          litre: "লিটার",
+                          piece: "পিস",
+                        }[product.unit] ?? product.unit}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="min-w-0">
-                    <h2 className="truncate text-base font-bold text-neutral-800">
-                      {product.nameBn}
-                    </h2>
+                  {/* Divider */}
+                  <div className="my-4 border-t border-neutral-100" />
 
-                    <p className="mt-0.5 text-xs text-neutral-500">
-                      প্রতি {product.unit}
-                    </p>
-                  </div>
-                </div>
+                  {/* Price */}
+                  <div className="mt-auto flex items-end justify-between gap-3">
+                    <div>
+                      <p className="text-xs text-neutral-500">আজকের দাম</p>
 
-                {/* Divider */}
-                <div className="my-4 border-t border-neutral-100" />
+                      <p className="mt-1 text-xl font-bold tracking-tight text-neutral-900">
+                        {product.today}{" "}
+                        <span className="text-sm font-normal text-neutral-600">
+                          টাকা
+                        </span>
+                      </p>
+                    </div>
 
-                {/* Price */}
-                <div className="mt-auto flex items-end justify-between gap-3">
-                  <div>
-                    <p className="text-xs text-neutral-500">আজকের দাম</p>
-
-                    <p className="mt-1 text-xl font-bold tracking-tight text-neutral-900">
-                      {product.today}{" "}
-                      <span className="text-sm font-normal text-neutral-600">
-                        টাকা
+                    {/* Change */}
+                    {product.change.dir === "flat" ? (
+                      <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600">
+                        — {product.change.pct}%
                       </span>
-                    </p>
+                    ) : (
+                      <span
+                        className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                          isUp
+                            ? "bg-red-50 text-red-600"
+                            : isDown
+                              ? "bg-green-50 text-green-600"
+                              : "bg-neutral-100 text-neutral-600"
+                        }`}
+                      >
+                        {isUp ? "▲" : "▼"} {product.change.pct}%
+                      </span>
+                    )}
                   </div>
-
-                  {/* Change */}
-                  {product.change.dir === "flat" ? (
-                    <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600">
-                      — {product.change.pct}%
-                    </span>
-                  ) : (
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        isUp
-                          ? "bg-red-50 text-red-600"
-                          : isDown
-                            ? "bg-green-50 text-green-600"
-                            : "bg-neutral-100 text-neutral-600"
-                      }`}
-                    >
-                      {isUp ? "▲" : "▼"} {product.change.pct}%
-                    </span>
-                  )}
-                </div>
+                </Link>
               </article>
             );
           })}

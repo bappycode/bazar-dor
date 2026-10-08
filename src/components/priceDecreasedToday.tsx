@@ -1,7 +1,9 @@
 import { API_BASE_URL, ApiResponseError, fetchApiJson } from "@/lib/api";
+import Link from "next/link";
 
 interface Product {
   id: number;
+  slug: string;
   nameBn: string;
   unit: string;
   image: string;
@@ -16,7 +18,7 @@ const PriceDecreasedToday = async () => {
   let data: Product[];
   try {
     data = await fetchApiJson<Product[]>(
-      `${API_BASE_URL}/api/bazardor/products`
+      `${API_BASE_URL}/api/bazardor/products`,
     );
   } catch (error) {
     if (!(error instanceof ApiResponseError)) {
@@ -36,9 +38,9 @@ const PriceDecreasedToday = async () => {
   }
 
   const increasedProducts = data
-  .filter((product) => product.change.dir === "down")
-  .sort((a, b) => a.change.pct - b.change.pct)
-  .slice(0, 6);
+    .filter((product) => product.change.dir === "down")
+    .sort((a, b) => a.change.pct - b.change.pct)
+    .slice(0, 6);
 
   return (
     <section className="mx-auto max-w-7xl rounded-xl bg-white px-4 py-6 shadow-sm">
@@ -46,9 +48,7 @@ const PriceDecreasedToday = async () => {
       <div className="mb-5 flex items-center gap-2">
         <span className="text-sm text-green-600">▼</span>
 
-        <h2 className="text-lg font-bold text-neutral-800">
-          আজ দাম কমেছে
-        </h2>
+        <h2 className="text-lg font-bold text-neutral-800">আজ দাম কমেছে</h2>
       </div>
 
       {/* Cards */}
@@ -58,42 +58,47 @@ const PriceDecreasedToday = async () => {
             key={product.id}
             className="rounded-xl border border-neutral-200 bg-white p-3 shadow-sm"
           >
-            {/* Product */}
-            <div className="flex items-center gap-3">
-              {/* Emoji icon */}
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-neutral-50 text-2xl">
-                {product.image}
+            <Link href={`/product/${product.slug}`}>
+              {/* Product */}
+              <div className="flex items-center gap-3">
+                {/* Emoji icon */}
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-neutral-50 text-2xl">
+                  {product.image}
+                </div>
+
+                {/* Name */}
+                <div>
+                  <h3 className="text-sm font-bold text-neutral-800">
+                    {product.nameBn}
+                  </h3>
+                  <p className="mt-0.5 text-xs text-neutral-500">
+                    প্রতি{" "}
+                    {{
+                      dozen: "ডজন",
+                      kg: "কেজি",
+                      litre: "লিটার",
+                      piece: "পিস",
+                    }[product.unit] ?? product.unit}
+                  </p>
+                </div>
               </div>
 
-              {/* Name */}
-              <div>
-                <h3 className="text-sm font-bold text-neutral-800">
-                  {product.nameBn}
-                </h3>
+              {/* Price */}
+              <div className="mt-4 flex items-end justify-between">
+                <div>
+                  <p className="text-xs text-neutral-500">আজকের দাম</p>
 
-                <p className="text-xs text-neutral-500">
-                  প্রতি {product.unit}
-                </p>
+                  <p className="mt-0.5 text-base font-bold text-neutral-800">
+                    {product.today} টাকা
+                  </p>
+                </div>
+
+                {/* Change */}
+                <span className="rounded-full bg-green-50 px-2 py-1 text-[10px] font-medium text-green-600">
+                  ▼ {product.change.pct}%
+                </span>
               </div>
-            </div>
-
-            {/* Price */}
-            <div className="mt-4 flex items-end justify-between">
-              <div>
-                <p className="text-xs text-neutral-500">
-                  আজকের দাম
-                </p>
-
-                <p className="mt-0.5 text-base font-bold text-neutral-800">
-                  {product.today} টাকা
-                </p>
-              </div>
-
-              {/* Change */}
-              <span className="rounded-full bg-green-50 px-2 py-1 text-[10px] font-medium text-green-600">
-                ▼ {product.change.pct}%
-              </span>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
