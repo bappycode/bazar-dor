@@ -1,6 +1,9 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
+
 
 const SignUp = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
@@ -25,16 +28,16 @@ const SignUp = () => {
     const { data, error } = await authClient.signUp.email({
       email: user.email,
       password: user.password,
-      name: user.name,
-      callbackURL: "/",
+      name: user.name
     });
 
     if (data) {
-      console.log(data);
+      redirect('/');
+       toast.success("Successfully Logged in");
     }
 
     if (error) {
-      console.log(error);
+      toast.error("Successfully Logged in");
     }
   };
   const onGoogleSignIn = async () => {
