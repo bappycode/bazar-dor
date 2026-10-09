@@ -43,7 +43,7 @@ const Marquee = async () => {
               </span>
 
               <span className="mx-5">
-                {n.today} টাকা/
+                {n.today.toLocaleString("bn-BD")} টাকা/
                 {{
                   dozen: "ডজন",
                   kg: "কেজি",
