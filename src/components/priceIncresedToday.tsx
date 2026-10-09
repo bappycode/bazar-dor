@@ -91,7 +91,7 @@ const PriceIncreasedToday = async () => {
                   <p className="text-xs text-neutral-500">আজকের দাম</p>
 
                   <p className="mt-0.5 text-base font-bold text-neutral-800">
-                    {product.today} টাকা
+                    {product.today.toLocaleString("bn-BD")} টাকা
                   </p>
                 </div>
 

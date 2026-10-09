@@ -161,7 +161,7 @@ const ProductSort = ({ products }: ProductSortProps) => {
                       <p className="text-xs text-neutral-500">আজকের দাম</p>
 
                       <p className="mt-1 text-xl font-bold tracking-tight text-neutral-900">
-                        {product.today}{" "}
+                        {product.today.toLocaleString("bn-BD")}{" "}
                         <span className="text-sm font-normal text-neutral-600">
                           টাকা
                         </span>

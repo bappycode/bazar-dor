@@ -57,7 +57,7 @@ const Marquee = async () => {
                   n.change.dir === "up" ? "text-red-600" : "text-green-600"
                 }
               >
-                {n.change.dir === "up" ? "▲" : "▼"} {n.change.pct}%
+                {n.change.dir === "up" ? "▲" : "▼"} {n.change.pct.toLocaleString("bn-BD")}%
               </span>
 
               <span className="mx-5">|</span>
