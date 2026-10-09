@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { API_BASE_URL, ApiResponseError, fetchApiJson } from "@/lib/api";
+import ActiveNav from "./activenav";
+
 
 interface Product {
     id: string
@@ -23,11 +24,8 @@ const NavLinks = async () => {
             </p>
         );
     }
-
     return (
-        <div className="flex gap-5 justify-center mt-5">
-            {data.map((n) => <Link href={`/category/${n.slug}`} key={n.id}>{n.icon}{n.nameBn}</Link>)}
-        </div>
+        <ActiveNav category={data}/>
     );
 };
 
