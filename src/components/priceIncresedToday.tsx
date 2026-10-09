@@ -41,9 +41,6 @@ const PriceIncreasedToday = async () => {
     .filter((product) => product.change.dir === "up")
     .sort((a, b) => b.change.pct - a.change.pct)
     .slice(0, 6);
-
-  console.log(increasedProducts);
-
   return (
     <section className="mx-auto max-w-7xl rounded-xl bg-white px-4 py-6 shadow-sm">
       {/* Title */}

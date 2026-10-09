@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import NavLinks from "./navlinks";
+import UserInfo from "./userInfo";
 
 const Header = async () => {
   await connection();
@@ -28,18 +29,7 @@ const Header = async () => {
           <h2>বাজার দর</h2>
           <p>{date}</p>
         </div>
-        <div className="absolute right-4 top-4 flex items-center gap-3 text-sm sm:right-8">
-          <Link href={'/sign-in'}>
-          <button className="btn btn-ghost text-neutral-700 transition-colors hover:text-green-700">
-            সাইন ইন
-          </button>
-          </Link>
-          <Link href={'/sign-up'}>
-          <button className="btn bg-green-700 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-green-800">
-            সাইন আপ
-          </button>
-          </Link>
-        </div>
+        <UserInfo/>
       </div>
       <NavLinks/>
     </header>
