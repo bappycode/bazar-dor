@@ -94,7 +94,7 @@ const PriceIncreasedToday = async () => {
 
                 {/* Change */}
                 <span className="rounded-full bg-green-50 px-2 py-1 text-[10px] font-medium text-red-600">
-                  ▲ {product.change.pct}%
+                  ▲ {product.change.pct.toLocaleString("bn-BD")}%
                 </span>
               </div>
             </Link>

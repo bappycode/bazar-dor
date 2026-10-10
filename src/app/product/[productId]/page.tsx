@@ -147,7 +147,7 @@ const ProductContent = async ({ params }: PropsType) => {
                 product.change.dir === "up" ? "text-red-600" : "text-green-600"
               }`}
             >
-              {product.change.dir === "up" ? "▲" : "▼"} {product.change.pct}%
+              {product.change.dir === "up" ? "▲" : "▼"} {product.change.pct.toLocaleString("bn-BD")}%
             </p>
           </div>
         </div>
