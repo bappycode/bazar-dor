@@ -1,9 +1,10 @@
 import Link from "next/link";
+import BackButton from "@/components/BackButton";
 import React from "react";
 
 const NotFound = () => {
   return (
-    <main className="flex min-h-[80vh] items-center justify-center bg-[#f1f6f1] px-4 py-12">
+    <section className="relative left-1/2 -ml-[50vw] flex w-screen flex-1 items-center justify-center bg-[#f1f6f1] px-4 py-12">
       <div className="w-full max-w-lg text-center">
         {/* Illustration */}
         <div className="relative mx-auto mb-6 flex h-36 w-36 items-center justify-center rounded-full bg-[#e2f0e5] sm:h-44 sm:w-44">
@@ -53,25 +54,7 @@ const NotFound = () => {
             হোম পেজে ফিরে যান
           </Link>
 
-          <button
-            type="button"
-            onClick={() => window.history.back()}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#dce6dc] bg-white px-6 py-3 text-sm font-semibold text-[#344239] transition hover:bg-[#f7faf7] focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="h-5 w-5"
-              aria-hidden="true"
-            >
-              <path d="m12 19-7-7 7-7" />
-              <path d="M5 12h14" />
-            </svg>
-            আগের পৃষ্ঠায় ফিরে যান
-          </button>
+          <BackButton />
         </div>
 
         {/* Footer Note */}
@@ -82,7 +65,7 @@ const NotFound = () => {
           </p>
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 

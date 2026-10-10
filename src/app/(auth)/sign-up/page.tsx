@@ -20,7 +20,7 @@ const SignUp = () => {
 
     // Check whether passwords match
     if (user.password !== user.confirmPassword) {
-      alert("পাসওয়ার্ড দুটি মিলছে না। আবার চেষ্টা করুন।");
+      toast.error("পাসওয়ার্ড দুটি মিলছে না। আবার চেষ্টা করুন।");
       return;
     }
 
@@ -37,7 +37,7 @@ const SignUp = () => {
     }
 
     if (error) {
-      toast.error("Successfully Logged in");
+      toast.error(error.message ?? "Sign in failed");
     }
   };
   const onGoogleSignIn = async () => {

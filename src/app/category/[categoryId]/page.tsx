@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { API_BASE_URL, ApiResponseError, fetchApiJson } from "@/lib/api";
 import ProductSort from "@/components/ProductSort";
+import { notFound } from "next/navigation";
 
 interface Product {
   id: number;
@@ -57,16 +58,13 @@ const CategoryContent = async ({ params }: CategoryPageProps) => {
       </p>
     );
   }
-
-  if (products.length === 0) {
+ 
+  const category = products[0];
+   if (!category) {
     return (
-      <p className="mx-auto max-w-7xl px-4 py-10 text-center text-sm text-neutral-500">
-        এই বিভাগে কোনো পণ্য পাওয়া যায়নি।
-      </p>
+      notFound()
     );
   }
-
-  const category = products[0];
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8">

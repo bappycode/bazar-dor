@@ -1,6 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
@@ -20,10 +21,12 @@ const SignIn = () => {
     });
 
     if (data) {
+      toast.success('Successfully Logged in')
       console.log(data);
     }
 
     if (error) {
+      toast.error(error.message ?? "Sign in failed")
       console.log(error);
     }
   };

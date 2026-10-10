@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={<div className="h-10 bg-white-700" />}>
           <Marquee />
         </Suspense>
-        <main className="max-w-7xl mx-auto">
+        <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
         {children}
         </main>
         <Toaster/>
