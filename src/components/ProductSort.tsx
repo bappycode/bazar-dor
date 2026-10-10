@@ -171,7 +171,7 @@ const ProductSort = ({ products }: ProductSortProps) => {
                     {/* Change */}
                     {product.change.dir === "flat" ? (
                       <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600">
-                        — {product.change.pct}%
+                        — {product.change.pct.toLocaleString("bn-BD")}%
                       </span>
                     ) : (
                       <span
@@ -183,7 +183,7 @@ const ProductSort = ({ products }: ProductSortProps) => {
                               : "bg-neutral-100 text-neutral-600"
                         }`}
                       >
-                        {isUp ? "▲" : "▼"} {product.change.pct}%
+                        {isUp ? "▲" : "▼"} {product.change.pct.toLocaleString("bn-BD")}%
                       </span>
                     )}
                   </div>
