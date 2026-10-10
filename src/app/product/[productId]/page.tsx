@@ -1,7 +1,6 @@
 import { API_BASE_URL, ApiResponseError, fetchApiJson } from "@/lib/api";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 interface PropsType {
   params: Promise<{ productId: string }>;
@@ -61,7 +60,7 @@ const ProductContent = async ({ params }: PropsType) => {
   }
  
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
+    <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:py-8">
       <nav
         aria-label="Breadcrumb"
         className="mb-6 flex gap-2 text-sm text-neutral-600"
@@ -155,8 +154,8 @@ const ProductContent = async ({ params }: PropsType) => {
       </section>
       <section className="mt-10">
         <h2 className="text-bold text-2xl text-black">দামের সারসংক্ষেপ</h2>
-        <div className="grid grid-cols-3 gap-5">
-          <div className="card bg-base-100 w-96 shadow-sm">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="card bg-base-100 w-full min-w-0 shadow-sm">
             <div className="card-body">
               <h2 className="card-title">সর্বনিম্ন দাম</h2>
               <p>
@@ -172,7 +171,7 @@ const ProductContent = async ({ params }: PropsType) => {
               <p>সবচেয়ে কম দামের বাজার</p>
             </div>
           </div>
-          <div className="card bg-base-100 w-96 shadow-sm">
+          <div className="card bg-base-100 w-full min-w-0 shadow-sm">
             <div className="card-body">
               <h2 className="card-title">সর্বাধিক দাম</h2>
               <p>
@@ -188,7 +187,7 @@ const ProductContent = async ({ params }: PropsType) => {
               <p>সবচেয়ে বেশি দামের বাজার</p>
             </div>
           </div>
-          <div className="card bg-base-100 w-96 shadow-sm">
+          <div className="card bg-base-100 w-full min-w-0 shadow-sm">
             <div className="card-body">
               <h2 className="card-title">গড় দাম</h2>
               <p>
@@ -294,16 +293,6 @@ const ProductContent = async ({ params }: PropsType) => {
   );
 };
 
-const ProductDetails = (props: PropsType) => (
-  <Suspense
-    fallback={
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
-        <div className="h-5 w-64 animate-pulse rounded bg-neutral-100" />
-      </main>
-    }
-  >
-    <ProductContent params={props.params} />
-  </Suspense>
-);
-
-export default ProductDetails;
+export default function ProductDetails(props: PropsType) {
+  return <ProductContent params={props.params} />;
+}

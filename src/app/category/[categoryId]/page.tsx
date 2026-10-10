@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { API_BASE_URL, ApiResponseError, fetchApiJson } from "@/lib/api";
 import ProductSort from "@/components/ProductSort";
 import { notFound } from "next/navigation";
@@ -95,34 +94,6 @@ const CategoryContent = async ({ params }: CategoryPageProps) => {
   );
 };
 
-const CategoryPage = (props: CategoryPageProps) => (
-  <Suspense
-    fallback={
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
-        {/* Header Skeleton */}
-        <div className="h-24 animate-pulse rounded-2xl bg-neutral-100" />
-
-        {/* Toolbar Skeleton */}
-        <div className="mt-6 flex items-center justify-between">
-          <div className="h-5 w-32 animate-pulse rounded bg-neutral-100" />
-
-          <div className="h-9 w-32 animate-pulse rounded-lg bg-neutral-100" />
-        </div>
-
-        {/* Product Skeleton */}
-        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <div
-              key={index}
-              className="h-[170px] animate-pulse rounded-2xl bg-neutral-100"
-            />
-          ))}
-        </div>
-      </main>
-    }
-  >
-    <CategoryContent params={props.params} />
-  </Suspense>
-);
-
-export default CategoryPage;
+export default function CategoryPage(props: CategoryPageProps) {
+  return <CategoryContent params={props.params} />;
+}
