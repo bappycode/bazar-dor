@@ -25,10 +25,12 @@ const Header = async () => {
           />
         </div>
         </Link>
+        <Link href="/">
         <div>
           <h2>বাজার দর</h2>
           <p>{date}</p>
         </div>
+        </Link>
         <UserInfo/>
       </div>
       <NavLinks/>
