@@ -118,7 +118,7 @@ const ProductContent = async ({ params }: PropsType) => {
                 গতকালের তুলনায় আজ দাম{" "}
                 <span>
                   {product.change.dir === "up" ? "বেড়েছে" : "কমেছে"}{" "}
-                  {product.change.pct}%
+                  {product.change.pct.toLocaleString("bn-BD")}%
                 </span>
               </p>
             </div>
